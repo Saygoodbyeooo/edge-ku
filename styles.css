@@ -1,0 +1,40 @@
+/**
+ * Edge AI Chat Switcher – page-level styles
+ *
+ * Scope: This file is injected alongside content.js exclusively on the three
+ * target sites (manifest.json, content_scripts.matches).
+ *
+ * All switcher styles are inside the Shadow DOM (built in content.js).
+ * This file only provides the bare minimum needed at the document level:
+ *   1. A reset for the shadow-host element so it has no layout impact.
+ *   2. High-DPI (Retina / 2×) media query that upscales icon resolution.
+ *
+ * Keeping rules here minimal prevents any accidental style interference
+ * with the host page's own CSS.
+ */
+
+/* ── Shadow-host element ──────────────────────────────────────────────────────
+   The <div id="ai-chat-switcher-host"> appended by content.js should be a
+   pure overlay with zero layout contribution.                                 */
+#ai-chat-switcher-host {
+  all: initial;          /* resets inherited properties from the host page     */
+  display: block;        /* must be a block for fixed children to anchor to it */
+  position: fixed;       /* pulled out of normal flow                          */
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  overflow: visible;
+  z-index: 2147483647;   /* maximum z-index; stays above all page content      */
+  pointer-events: none;  /* the host box itself is click-through               */
+}
+
+/* ── High-DPI icon sharpness ──────────────────────────────────────────────────
+   On Retina screens (devicePixelRatio ≥ 2) we hint to the browser that
+   icon images should be rendered with sub-pixel precision.                    */
+@media (min-resolution: 2dppx) {
+  #ai-chat-switcher-host img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
