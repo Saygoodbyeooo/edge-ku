@@ -1,0 +1,61 @@
+/**
+ * styles/variables.css
+ * CSS variables for doubao-timeline extension.
+ * Aligned with houyanchao/AITimeline visual style.
+ */
+
+:root {
+  /* Timeline dot colors */
+  --ait-timeline-dot-color: #D1D5DB;
+  --ait-timeline-dot-active-color: #6128FF;
+  --ait-timeline-dot-hover-color: #8B5CF6;
+
+  /* Dot sizing */
+  --ait-timeline-dot-size: 14px;
+  --ait-timeline-dot-hover-size: 16px;
+  --ait-timeline-dot-active-size: 16px;
+
+  /* Timeline bar / track */
+  --timeline-bar-bg: rgba(246, 246, 248, 0.8);
+  --timeline-bar-border: rgba(209, 213, 219, 0.6);
+  --timeline-track-color: rgba(209, 213, 219, 0.5);
+  --timeline-track-active-color: rgba(97, 40, 255, 0.3);
+
+  /* Compact line (used when messages > 20) */
+  --timeline-compact-line-color: rgba(209, 213, 219, 0.6);
+  --timeline-compact-line-active-color: #6128FF;
+  --timeline-compact-line-height: 2px;
+  --timeline-compact-line-active-height: 3px;
+
+  /* Tooltip */
+  --timeline-tooltip-bg: #0d0d0d;
+  --timeline-tooltip-color: #ffffff;
+  --timeline-tooltip-border-radius: 8px;
+  --timeline-tooltip-padding: 6px 10px;
+  --timeline-tooltip-font-size: 12px;
+  --timeline-tooltip-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --timeline-tooltip-arrow-size: 6px;
+
+  /* Toggle button */
+  --timeline-toggle-bg: rgba(97, 40, 255, 0.15);
+  --timeline-toggle-hover-bg: rgba(97, 40, 255, 0.4);
+  --timeline-toggle-border: rgba(97, 40, 255, 0.3);
+  --timeline-toggle-icon-color: #6128FF;
+
+  /* Layout */
+  --timeline-bar-width: 32px;
+  --timeline-bar-padding: 8px;
+  --timeline-bar-radius: 16px;
+  --timeline-right-offset: 20px;
+  --timeline-z-index: 2147483640;
+
+  /* Transitions */
+  --timeline-transition-fast: 0.15s ease;
+  --timeline-transition-normal: 0.2s ease;
+  --timeline-transition-slow: 0.3s ease;
+
+  /* Shadow */
+  --timeline-dot-shadow: 0 0 0 2px rgba(97, 40, 255, 0.2);
+  --timeline-dot-active-shadow: 0 0 0 3px rgba(97, 40, 255, 0.3), 0 0 8px rgba(97, 40, 255, 0.5);
+  --timeline-bar-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
