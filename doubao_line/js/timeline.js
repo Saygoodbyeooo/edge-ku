@@ -24,6 +24,7 @@
   const TOOLTIP_CLASS = 'doubao-dot-tooltip';
   const DEBOUNCE_MS = 500;
   const TIMELINE_THRESHOLD = 20;
+  const LINE_ITEM_HEIGHT = 8; // px spacing between line items
 
   // ─── State ─────────────────────────────────────────────────────────────────
   let host = null;
@@ -137,15 +138,21 @@
     if (!dotsContainer) return;
     dotsContainer.innerHTML = '';
 
-    const dotClass = messages.length > TIMELINE_THRESHOLD ? 'doubao-line' : 'doubao-dot';
+    const useLines = messages.length > TIMELINE_THRESHOLD;
+    const dotClass = useLines ? 'doubao-line' : 'doubao-dot';
 
     messages.forEach((msgEl, idx) => {
       const dot = document.createElement('div');
       dot.className = dotClass;
 
-      // Position proportionally along the timeline
-      const pct = messages.length === 1 ? 0.5 : idx / (messages.length - 1);
-      dot.style.top = (pct * 100) + '%';
+      if (useLines) {
+        // Use fixed pixel spacing so content can overflow and scroll
+        dot.style.top = (idx * LINE_ITEM_HEIGHT) + 'px';
+      } else {
+        // Position proportionally along the timeline
+        const pct = messages.length === 1 ? 0.5 : idx / (messages.length - 1);
+        dot.style.top = (pct * 100) + '%';
+      }
 
       const summary = getSummary(msgEl);
 
@@ -158,6 +165,13 @@
       dot.dataset.idx = idx;
       dotsContainer.appendChild(dot);
     });
+
+    if (useLines) {
+      // Set inner height so the container knows the full scrollable extent
+      dotsContainer.style.minHeight = (messages.length * LINE_ITEM_HEIGHT) + 'px';
+    } else {
+      dotsContainer.style.minHeight = '';
+    }
   }
 
   // ─── Active dot update ─────────────────────────────────────────────────────
@@ -189,6 +203,12 @@
     dots.forEach((dot, idx) => {
       dot.classList.toggle('active', idx === activeIdx);
     });
+
+    // Scroll the active dot into view within the timeline container
+    const activeDot = dotsContainer.querySelector('.doubao-dot.active, .doubao-line.active');
+    if (activeDot) {
+      activeDot.scrollIntoView({ block: 'nearest', behavior: 'auto' });
+    }
   }
 
   // ─── Scroll handling ───────────────────────────────────────────────────────
