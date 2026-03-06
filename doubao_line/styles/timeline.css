@@ -70,6 +70,32 @@
   box-shadow: 0 0 8px rgba(139, 92, 246, 0.8);
 }
 
+/* Line style (used when message count > 20) */
+.doubao-line {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 16px;
+  height: 2px;
+  border-radius: 1px;
+  background: rgba(139, 92, 246, 0.5);
+  cursor: pointer;
+  pointer-events: all;
+  transition: height 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.doubao-line:hover {
+  height: 3px;
+  background: rgba(139, 92, 246, 0.8);
+  box-shadow: 0 0 6px rgba(139, 92, 246, 0.6);
+}
+
+.doubao-line.active {
+  height: 3px;
+  background: #8b5cf6;
+  box-shadow: 0 0 8px rgba(139, 92, 246, 0.8);
+}
+
 /* Tooltip */
 .doubao-dot-tooltip {
   position: fixed;

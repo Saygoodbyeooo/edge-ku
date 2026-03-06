@@ -23,6 +23,7 @@
   const HOST_ID = 'doubao-timeline-host';
   const TOOLTIP_CLASS = 'doubao-dot-tooltip';
   const DEBOUNCE_MS = 500;
+  const TIMELINE_THRESHOLD = 20;
 
   // ─── State ─────────────────────────────────────────────────────────────────
   let host = null;
@@ -136,9 +137,11 @@
     if (!dotsContainer) return;
     dotsContainer.innerHTML = '';
 
+    const dotClass = messages.length > TIMELINE_THRESHOLD ? 'doubao-line' : 'doubao-dot';
+
     messages.forEach((msgEl, idx) => {
       const dot = document.createElement('div');
-      dot.className = 'doubao-dot';
+      dot.className = dotClass;
 
       // Position proportionally along the timeline
       const pct = messages.length === 1 ? 0.5 : idx / (messages.length - 1);
@@ -182,7 +185,7 @@
       }
     });
 
-    const dots = dotsContainer.querySelectorAll('.doubao-dot');
+    const dots = dotsContainer.querySelectorAll('.doubao-dot, .doubao-line');
     dots.forEach((dot, idx) => {
       dot.classList.toggle('active', idx === activeIdx);
     });
