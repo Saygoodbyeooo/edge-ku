@@ -1,5 +1,7 @@
 # edge-ku
 
+🌐 Language: **English** | [中文](./README.zh-CN.md)
+
 A collection of Edge / Chrome browser extensions, one folder per extension.
 
 ## Repository Structure
