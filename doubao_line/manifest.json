@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "Doubao Timeline & Performance Optimizer",
+  "version": "1.0.0",
+  "description": "为豆包（doubao.com）提供对话时间线导航与性能优化",
+  "permissions": ["activeTab"],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.doubao.com/*",
+        "https://doubao.com/*"
+      ],
+      "js": ["js/timeline.js", "js/performance.js"],
+      "css": ["styles/timeline.css", "styles/performance.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}

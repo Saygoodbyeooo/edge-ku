@@ -1,0 +1,7 @@
+/* Doubao Performance – styles applied to recycled (off-screen) message nodes */
+
+[data-doubao-recycled="true"] {
+  animation-play-state: paused !important;
+  transition: none !important;
+  will-change: auto !important;
+}
