@@ -14,6 +14,15 @@ edge-ku/
 │   ├── styles.css
 │   ├── popup.html
 │   └── README.md       # Extension-specific documentation
+├── doubao_line/        # Doubao Timeline & Performance Optimizer
+│   ├── manifest.json
+│   ├── js/
+│   │   ├── timeline.js
+│   │   └── performance.js
+│   ├── styles/
+│   │   ├── timeline.css
+│   │   └── performance.css
+│   └── README.md       # Extension-specific documentation
 └── README.md           # This file
 ```
 
@@ -24,6 +33,7 @@ Each subfolder is a self-contained extension with its own source files and `READ
 | Folder | Description |
 |--------|-------------|
 | [`ai-chat-switcher`](./ai-chat-switcher/) | Floating switcher & toolbar popup for Google Gemini, Doubao, and Microsoft Copilot |
+| [`doubao_line`](./doubao_line/) | Vertical conversation timeline and DOM recycling performance optimiser for Doubao |
 
 ## Adding a New Extension
 

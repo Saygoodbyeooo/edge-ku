@@ -14,6 +14,15 @@ edge-ku/
 │   ├── styles.css
 │   ├── popup.html
 │   └── README.md       # 扩展说明文档
+├── doubao_line/        # 豆包时间线与性能优化器
+│   ├── manifest.json
+│   ├── js/
+│   │   ├── timeline.js
+│   │   └── performance.js
+│   ├── styles/
+│   │   ├── timeline.css
+│   │   └── performance.css
+│   └── README.md       # 扩展说明文档
 └── README.md           # 英文说明
 ```
 
@@ -24,6 +33,7 @@ edge-ku/
 | 文件夹 | 说明 |
 |--------|------|
 | [`ai-chat-switcher`](./ai-chat-switcher/) | 为 Google Gemini、豆包和 Microsoft Copilot 提供悬浮切换器和工具栏弹窗 |
+| [`doubao_line`](./doubao_line/) | 为豆包提供垂直对话时间线导航与 DOM 回收性能优化 |
 
 ## 添加新扩展
 

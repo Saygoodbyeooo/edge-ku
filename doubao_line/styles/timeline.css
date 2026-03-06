@@ -1,0 +1,131 @@
+/* Doubao Timeline – timeline container, dots, tooltip, toggle button */
+
+#doubao-timeline-host {
+  position: fixed;
+  top: 120px;
+  right: 22px;
+  bottom: 120px;
+  width: 24px;
+  z-index: 2147483640;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+}
+
+#doubao-timeline-host.collapsed #doubao-timeline-line,
+#doubao-timeline-host.collapsed #doubao-timeline-dots {
+  display: none;
+}
+
+/* Vertical line */
+#doubao-timeline-line {
+  position: absolute;
+  top: 32px;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  background: rgba(139, 92, 246, 0.25);
+  border-radius: 1px;
+  pointer-events: none;
+}
+
+/* Dots container */
+#doubao-timeline-dots {
+  position: absolute;
+  top: 32px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+}
+
+/* Individual dot */
+.doubao-dot {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(139, 92, 246, 0.5);
+  cursor: pointer;
+  pointer-events: all;
+  transition: width 0.2s ease, height 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+}
+
+.doubao-dot:hover {
+  width: 10px;
+  height: 10px;
+  background: rgba(139, 92, 246, 0.8);
+  box-shadow: 0 0 6px rgba(139, 92, 246, 0.6);
+}
+
+.doubao-dot.active {
+  width: 10px;
+  height: 10px;
+  background: #8b5cf6;
+  box-shadow: 0 0 8px rgba(139, 92, 246, 0.8);
+}
+
+/* Tooltip */
+.doubao-dot-tooltip {
+  position: fixed;
+  max-width: 200px;
+  padding: 6px 10px;
+  background: rgba(28, 28, 35, 0.95);
+  color: #fff;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 6px;
+  pointer-events: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  z-index: 2147483641;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.doubao-dot-tooltip.visible {
+  opacity: 1;
+}
+
+/* Toggle button */
+#doubao-timeline-toggle {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(139, 92, 246, 0.5);
+  border: none;
+  cursor: pointer;
+  pointer-events: all;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, transform 0.2s ease;
+  padding: 0;
+  outline: none;
+}
+
+#doubao-timeline-toggle:hover {
+  background: #8b5cf6;
+}
+
+#doubao-timeline-toggle svg {
+  width: 10px;
+  height: 10px;
+  fill: #fff;
+  transition: transform 0.2s ease;
+}
+
+#doubao-timeline-host.collapsed #doubao-timeline-toggle svg {
+  transform: rotate(180deg);
+}
