@@ -1,0 +1,76 @@
+/**
+ * styles/tooltip.css
+ * GlobalTooltipManager tooltip styles.
+ * Visual design aligned with houyanchao/AITimeline.
+ */
+
+/* ─── Base tooltip ───────────────────────────────────────────────────────── */
+
+.timeline-tooltip-base {
+  position: fixed;
+  max-width: 220px;
+  padding: var(--timeline-tooltip-padding);
+  font-size: var(--timeline-tooltip-font-size);
+  line-height: 1.5;
+  border-radius: var(--timeline-tooltip-border-radius);
+  pointer-events: none;
+  white-space: pre-wrap;
+  word-break: break-word;
+  z-index: calc(var(--timeline-z-index) + 1);
+  opacity: 0;
+  transition: opacity var(--timeline-transition-fast);
+}
+
+.timeline-tooltip-base.visible {
+  opacity: 1;
+}
+
+/* ─── Dark theme ─────────────────────────────────────────────────────────── */
+
+.timeline-tooltip-dark {
+  background: var(--timeline-tooltip-bg);
+  color: var(--timeline-tooltip-color);
+  box-shadow: var(--timeline-tooltip-shadow);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ─── Arrows ─────────────────────────────────────────────────────────────── */
+
+.timeline-tooltip-base::after {
+  content: '';
+  position: absolute;
+  border: var(--timeline-tooltip-arrow-size) solid transparent;
+  pointer-events: none;
+}
+
+/* Arrow pointing right (tooltip is to the left of the target) */
+.timeline-tooltip-base.arrow-right::after {
+  top: 50%;
+  right: calc(-2 * var(--timeline-tooltip-arrow-size));
+  transform: translateY(-50%);
+  border-left-color: var(--timeline-tooltip-bg);
+}
+
+/* Arrow pointing left (tooltip is to the right of the target) */
+.timeline-tooltip-base.arrow-left::after {
+  top: 50%;
+  left: calc(-2 * var(--timeline-tooltip-arrow-size));
+  transform: translateY(-50%);
+  border-right-color: var(--timeline-tooltip-bg);
+}
+
+/* Arrow pointing down (tooltip is above the target) */
+.timeline-tooltip-base.arrow-down::after {
+  bottom: calc(-2 * var(--timeline-tooltip-arrow-size));
+  left: 50%;
+  transform: translateX(-50%);
+  border-top-color: var(--timeline-tooltip-bg);
+}
+
+/* Arrow pointing up (tooltip is below the target) */
+.timeline-tooltip-base.arrow-up::after {
+  top: calc(-2 * var(--timeline-tooltip-arrow-size));
+  left: 50%;
+  transform: translateX(-50%);
+  border-bottom-color: var(--timeline-tooltip-bg);
+}

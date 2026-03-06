@@ -1,0 +1,219 @@
+/**
+ * styles/timeline.css
+ * Timeline bar, track, dots, and compact-line styles.
+ * Visual design aligned with houyanchao/AITimeline.
+ */
+
+/* ─── Timeline bar container ────────────────────────────────────────────── */
+
+.ait-timeline-bar {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  right: var(--timeline-right-offset);
+  width: var(--timeline-bar-width);
+  max-height: calc(100vh - 160px);
+  z-index: var(--timeline-z-index);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--timeline-bar-bg);
+  border: 1px solid var(--timeline-bar-border);
+  border-radius: var(--timeline-bar-radius);
+  padding: var(--timeline-bar-padding) 0;
+  box-shadow: var(--timeline-bar-shadow);
+  pointer-events: none;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: opacity var(--timeline-transition-normal),
+              transform var(--timeline-transition-normal);
+}
+
+/* Collapsed state: hide track and nodes */
+.ait-timeline-bar.collapsed .ait-timeline-track,
+.ait-timeline-bar.collapsed .ait-timeline-node {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Collapsed state: shrink bar */
+.ait-timeline-bar.collapsed {
+  max-height: 36px;
+  overflow: hidden;
+}
+
+/* ─── Toggle button ─────────────────────────────────────────────────────── */
+
+.ait-timeline-toggle {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--timeline-toggle-bg);
+  border: 1px solid var(--timeline-toggle-border);
+  cursor: pointer;
+  pointer-events: all;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--timeline-transition-normal),
+              transform var(--timeline-transition-normal);
+  padding: 0;
+  outline: none;
+  margin-bottom: 4px;
+}
+
+.ait-timeline-toggle:hover {
+  background: var(--timeline-toggle-hover-bg);
+}
+
+.ait-timeline-toggle svg {
+  width: 8px;
+  height: 8px;
+  fill: var(--timeline-toggle-icon-color);
+  transition: transform var(--timeline-transition-normal);
+}
+
+.ait-timeline-bar.collapsed .ait-timeline-toggle svg {
+  transform: rotate(180deg);
+}
+
+/* ─── Vertical track ─────────────────────────────────────────────────────── */
+
+.ait-timeline-track {
+  position: relative;
+  flex: 1;
+  width: 2px;
+  background: var(--timeline-track-color);
+  border-radius: 1px;
+  min-height: 20px;
+  overflow: visible;
+  pointer-events: none;
+  transition: opacity var(--timeline-transition-normal);
+}
+
+/* Filled progress portion */
+.ait-timeline-track::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--ait-track-progress, 0%);
+  background: var(--timeline-track-active-color);
+  border-radius: 1px;
+  transition: height var(--timeline-transition-fast);
+}
+
+/* ─── Node wrapper ───────────────────────────────────────────────────────── */
+
+.ait-timeline-node {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  transition: opacity var(--timeline-transition-normal);
+}
+
+/* ─── Dot ────────────────────────────────────────────────────────────────── */
+
+.ait-timeline-dot {
+  width: var(--ait-timeline-dot-size);
+  height: var(--ait-timeline-dot-size);
+  border-radius: 50%;
+  background: var(--ait-timeline-dot-color);
+  cursor: pointer;
+  pointer-events: all;
+  transition: width var(--timeline-transition-normal),
+              height var(--timeline-transition-normal),
+              background var(--timeline-transition-normal),
+              box-shadow var(--timeline-transition-normal);
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.ait-timeline-dot:hover {
+  width: var(--ait-timeline-dot-hover-size);
+  height: var(--ait-timeline-dot-hover-size);
+  background: var(--ait-timeline-dot-hover-color);
+  box-shadow: var(--timeline-dot-shadow);
+}
+
+.ait-timeline-dot.active {
+  width: var(--ait-timeline-dot-active-size);
+  height: var(--ait-timeline-dot-active-size);
+  background: var(--ait-timeline-dot-active-color);
+  box-shadow: var(--timeline-dot-active-shadow);
+}
+
+/* ─── Compact line (used when messages > 20) ─────────────────────────────── */
+
+.timeline-compact-line {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: var(--timeline-compact-line-height);
+  border-radius: 1px;
+  background: var(--timeline-compact-line-color);
+  cursor: pointer;
+  pointer-events: all;
+  transition: height var(--timeline-transition-normal),
+              background var(--timeline-transition-normal),
+              box-shadow var(--timeline-transition-normal);
+}
+
+.timeline-compact-line:hover {
+  height: var(--timeline-compact-line-active-height);
+  background: var(--ait-timeline-dot-hover-color);
+  box-shadow: 0 0 6px rgba(97, 40, 255, 0.4);
+}
+
+.timeline-compact-line.active {
+  height: var(--timeline-compact-line-active-height);
+  background: var(--timeline-compact-line-active-color);
+  box-shadow: 0 0 8px rgba(97, 40, 255, 0.5);
+}
+
+/* ─── Nodes container (for compact/scrollable mode) ─────────────────────── */
+
+.ait-timeline-nodes {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  pointer-events: all;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(97, 40, 255, 0.3) transparent;
+}
+
+.ait-timeline-nodes::-webkit-scrollbar {
+  width: 3px;
+}
+
+.ait-timeline-nodes::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.ait-timeline-nodes::-webkit-scrollbar-thumb {
+  background: rgba(97, 40, 255, 0.3);
+  border-radius: 2px;
+}
+
+.ait-timeline-nodes::-webkit-scrollbar-thumb:hover {
+  background: rgba(97, 40, 255, 0.6);
+}
+
+/* ─── Responsive: hide on very small viewports ───────────────────────────── */
+
+@media (max-width: 600px) {
+  .ait-timeline-bar {
+    display: none;
+  }
+}
